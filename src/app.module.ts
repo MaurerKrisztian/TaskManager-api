@@ -11,6 +11,7 @@ import {ConfigModule} from "@nestjs/config";
 import {AuthMiddleware} from "./auth/auth-middleware.service";
 import {JwtModule, JwtService} from "@nestjs/jwt";
 import {jwtConstants} from "./services/constants";
+import {UserController} from "./user/user.controller";
 
 @Module({
     imports: [ConfigModule.forRoot({
@@ -21,7 +22,9 @@ import {jwtConstants} from "./services/constants";
         TaskboardModule, TaskModule, UserModule, AuthModule, DatabaseModule, JwtModule.register({
             secret: jwtConstants.secret,
             signOptions: {expiresIn: '5h'},
-        }),],
+        }),
+        UserModule
+    ],
     controllers: [AppController],
     providers: [AppService, AuthMiddleware],
 })

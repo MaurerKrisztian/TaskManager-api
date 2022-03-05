@@ -2,19 +2,21 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { TaskboardService } from './taskboard.service';
 import { CreateTaskboardDto } from './dto/create-taskboard.dto';
 import { UpdateTaskboardDto } from './dto/update-taskboard.dto';
+import {IUser, User} from "../auth/auth.user.decorator";
 
 @Controller('taskboard')
 export class TaskboardController {
   constructor(private readonly taskboardService: TaskboardService) {}
 
   @Post()
-  create(@Body() createTaskboardDto: CreateTaskboardDto) {
+  create(@Body() createTaskboardDto: CreateTaskboardDto, @User() user: IUser) {
+    createTaskboardDto["userId"] = user.id
     return this.taskboardService.create(createTaskboardDto);
   }
 
   @Get()
-  findAll() {
-    return this.taskboardService.findAll();
+  findAll(@User() user: IUser) {
+    return this.taskboardService.findByUserAndPopulate(user.id);
   }
 
   @Get(':id')

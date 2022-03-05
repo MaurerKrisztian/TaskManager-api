@@ -10,6 +10,10 @@ export class CrudService<DOC extends Document> {
         return this.Model.create(createDto);
     }
 
+    async find(filter: any): Promise<DOC[]> {
+        return this.Model.find(filter);
+    }
+
     async findByName(name: string): Promise<DOC> {
         return this.Model.findOne({ name: name } as FilterQuery<DOC>);
     }

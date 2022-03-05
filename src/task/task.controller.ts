@@ -22,6 +22,11 @@ export class TaskController {
     return this.taskService.findOne(+id);
   }
 
+  @Get('board/:id')
+  getBoardTask(@Param('id') boardId: string) {
+    return this.taskService.getBordTasks(boardId);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto) {
     return this.taskService.update(+id, updateTaskDto);

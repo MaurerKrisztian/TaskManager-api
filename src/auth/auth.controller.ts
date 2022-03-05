@@ -7,8 +7,7 @@ export class AuthController {
     }
 
     @Post('login')
-    async login(@Body() user, @Req() request): Promise<any> {
-        // request["user"]
+    async login(@Body() user): Promise<any> {
         return {username: user.username, token: await this.authService.login(user)};
     }
 }
