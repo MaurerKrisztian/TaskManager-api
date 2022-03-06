@@ -4,7 +4,7 @@ import { TaskboardController } from './taskboard.controller';
 import {TaskboardRepository} from "./schemas/Taskboard.repository";
 import {ConfigModule} from "@nestjs/config";
 import {MongooseModule} from "@nestjs/mongoose"
-import {TaskBoard, TaskboardSchema} from "./schemas/taskboard.schema";
+import {TaskBoard, TaskboardSchema} from "./schemas/Taskboard.schema";
 
 @Module({
   imports: [ConfigModule,
