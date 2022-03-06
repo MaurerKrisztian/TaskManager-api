@@ -25,8 +25,9 @@ export class TaskboardService {
         return `This action updates a #${id} taskboard`;
     }
 
-    remove(id: number) {
-        return `This action removes a #${id} taskboard`;
+    remove(id: string) {
+        // todo: remove all task
+        return this.taskboardRepository.remove(id);
     }
 
     findByUserAndPopulate(id: string) {

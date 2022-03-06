@@ -31,6 +31,6 @@ export class TaskboardController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.taskboardService.remove(+id);
+    return this.taskboardService.remove(id);
   }
 }

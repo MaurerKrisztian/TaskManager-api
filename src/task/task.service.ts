@@ -23,12 +23,14 @@ export class TaskService {
     return `This action returns a #${id} task`;
   }
 
-  update(id: number, updateTaskDto: UpdateTaskDto) {
-    return `This action updates a #${id} task`;
+  update(id: string, updateTaskDto: UpdateTaskDto) {
+    return this.taskRepository.update(id, updateTaskDto)
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} task`;
+  async remove(id: string) {
+    const task = await this.taskRepository.findOne(id);
+    await this.boardRepository.removeTask(task.boardId, task.id);
+    return this.taskRepository.remove(id)
   }
 
   getBordTasks(boardId: string) {
