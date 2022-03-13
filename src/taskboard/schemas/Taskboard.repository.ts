@@ -23,12 +23,29 @@ export class TaskboardRepository extends CrudService<TaskBoardDocument> {
             {$push: {tasks: taskId}})
     }
 
-    removeTask(boardId: string, taskId: string){
-        return this.boardModel.updateOne({ _id: boardId }, {
+    removeTask(boardId: string, taskId: string) {
+        return this.boardModel.updateOne({_id: boardId}, {
             $pullAll: {
                 tasks: [taskId],
             },
         });
     }
 
+    async moveTask(taskId: string, toBoardId: string, index: number = 0) {
+        await this.boardModel.updateOne({tasks: {"$in": [taskId]}}, {
+            $pull: {
+                tasks: taskId,
+            }
+        })
+        return this.boardModel.updateOne({_id: toBoardId}, {
+            $push: {
+                tasks: {
+                    $each: [taskId],
+                    $position: index
+
+                },
+            }
+        })
+
+    }
 }

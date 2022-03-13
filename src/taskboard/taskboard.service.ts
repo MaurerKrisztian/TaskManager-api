@@ -33,4 +33,8 @@ export class TaskboardService {
     findByUserAndPopulate(id: string) {
         return this.taskboardRepository.findByUserAndPopulate(id)
     }
+
+    moveTask(taskId: string, toBoardId: string, index: number) {
+        return this.taskboardRepository.moveTask(taskId, toBoardId, index)
+    }
 }
