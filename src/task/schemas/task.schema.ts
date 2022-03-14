@@ -5,6 +5,10 @@ export type TaskDocument = Task & Document;
 
 @Schema({toJSON: {virtuals: true}, toObject: {virtuals: true}})
 export class Task implements ITask {
+
+    @Prop({type: String, required: true})
+    userId: string;
+
     @Prop({type: String, required: true})
     title: string;
 
@@ -37,8 +41,11 @@ export interface ITask {
     description: string;
 
     createdAt: Date;
+    startAt?: Date;
 
     isCompleted: boolean;
 
     boardId: string
+
+    userId: string
 }

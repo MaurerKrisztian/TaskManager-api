@@ -11,7 +11,7 @@ import {ConfigModule} from "@nestjs/config";
 import {AuthMiddleware} from "./auth/auth-middleware.service";
 import {JwtModule, JwtService} from "@nestjs/jwt";
 import {jwtConstants} from "./services/constants";
-import {UserController} from "./user/user.controller";
+import {EmailModule} from './email/email.module';
 
 @Module({
     imports: [ConfigModule.forRoot({
@@ -23,7 +23,8 @@ import {UserController} from "./user/user.controller";
             secret: jwtConstants.secret,
             signOptions: {expiresIn: '5h'},
         }),
-        UserModule
+        UserModule,
+        EmailModule
     ],
     controllers: [AppController],
     providers: [AppService, AuthMiddleware],

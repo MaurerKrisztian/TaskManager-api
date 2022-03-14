@@ -19,7 +19,7 @@ export class AuthMiddleware implements NestMiddleware {
 
         }
         if (validate){
-            req["user"] = {role: "user", id: validate.id}
+            req["user"] = {role: "user", id: validate.id, username: validate.username}
         }else {
             req["user"] = {role: "guest", id: undefined}
         }

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="./email.css">
+    <style>
+        {{style}}
+    </style>
+    <title>Welcome Email</title>
+</head>
+<body>
+<h2 class="test">Today tasks:</h2>
+{{#each data}}
+
+    <p><b>title: {{title}}</b></p>
+    <p> startAt: {{startAt}}</p>
+    <hr>
+
+{{/each}}
+</body>
+</html>
