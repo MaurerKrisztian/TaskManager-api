@@ -25,10 +25,10 @@ export class EmailController {
     }
 
     @Post("setupeveryday")
-    async setup(@User() user: IUser, @Body() body: { hour: number, minute: number }) {
+    async setup(@User() user: IUser, @Body() body: { date: Date }) {
         const rule = new schedule.RecurrenceRule();
-        rule.hour = body.hour || 8;
-        rule.minute = body.minute || 0;
+        rule.hour =  new Date(body.date).getHours() || 8;
+        rule.minute =  new Date(body.date).getMinutes() || 0;
 
         const job = schedule.scheduleJob(rule, async () => {
             console.log("send job")
