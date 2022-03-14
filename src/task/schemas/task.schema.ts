@@ -11,15 +11,21 @@ export class Task implements ITask {
     @Prop({type: String, required: true})
     description: string;
 
-    @Prop({type: Date, required: true})
-    createdAt: Date;
-
     @Prop({type: Boolean, required: true})
     isCompleted: boolean;
 
-
     @Prop({type: String, required: true})
     boardId: string
+
+    @Prop({type: Date, required: true})
+    createdAt: Date;
+
+    @Prop({type: Date, required: false})
+    startAt?: Date;
+
+    @Prop({type: [String], required: false})
+    labels?: string[];
+
 }
 
 export const TaskSchema = SchemaFactory.createForClass(Task);
