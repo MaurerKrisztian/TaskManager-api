@@ -30,6 +30,13 @@ export class Task implements ITask {
     @Prop({type: [String], required: false})
     labels?: string[];
 
+    @Prop({
+        type: [String], default(val: any): any {
+            return []
+        }
+    })
+    fileIds: string[] = []
+
 }
 
 export const TaskSchema = SchemaFactory.createForClass(Task);

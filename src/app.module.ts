@@ -12,19 +12,24 @@ import {AuthMiddleware} from "./auth/auth-middleware.service";
 import {JwtModule, JwtService} from "@nestjs/jwt";
 import {jwtConstants} from "./services/constants";
 import {EmailModule} from './email/email.module';
+import {FileModule} from './file/file.module';
+
+import databaseConfig from './services/config/database.config';
 
 @Module({
-    imports: [ConfigModule.forRoot({
-        envFilePath: '.env',
-        isGlobal: true,
-    }),
+    imports: [
+        ConfigModule.forRoot({
+            isGlobal: true,
+            load: [databaseConfig],
+        }),
         MongooseModule.forRoot(process.env.DB_URI),
         TaskboardModule, TaskModule, UserModule, AuthModule, DatabaseModule, JwtModule.register({
             secret: jwtConstants.secret,
             signOptions: {expiresIn: '5h'},
         }),
         UserModule,
-        EmailModule
+        EmailModule,
+        FileModule
     ],
     controllers: [AppController],
     providers: [AppService, AuthMiddleware],
