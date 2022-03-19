@@ -1,33 +1,36 @@
-import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
+import {CreateUserDto} from './dto/create-user.dto';
+import {UpdateUserDto} from './dto/update-user.dto';
 import {UserRepository} from "./schemas/user.repository";
 
 @Injectable()
 export class UserService {
-  constructor(private readonly userRepository: UserRepository) {
-  }
-  create(createUserDto: CreateUserDto) {
-    return this.userRepository.create(createUserDto)
-  }
+    constructor(private readonly userRepository: UserRepository) {
+    }
 
-  findAll() {
-    return `This action returns all user`;
-  }
+    async create(createUserDto: CreateUserDto) {
+        const users = await this.userRepository.find({username: createUserDto.username});
+        if (users.length > 0) throw new HttpException('Username is not available', HttpStatus.FORBIDDEN);
+        return this.userRepository.create(createUserDto)
+    }
 
-  findOne(id: string) {
-    return this.userRepository.findOne(id)
-  }
+    findAll() {
+        return `This action returns all user`;
+    }
 
-  async findOneByName(name: string) {
-    return this.userRepository.findOneByName(name)
-  }
+    findOne(id: string) {
+        return this.userRepository.findOne(id)
+    }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
+    async findOneByName(name: string) {
+        return this.userRepository.findOneByName(name)
+    }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
-  }
+    update(id: number, updateUserDto: UpdateUserDto) {
+        return `This action updates a #${id} user`;
+    }
+
+    remove(id: number) {
+        return `This action removes a #${id} user`;
+    }
 }
