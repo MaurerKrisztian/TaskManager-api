@@ -3,7 +3,7 @@ import {Document} from 'mongoose';
 
 export type TaskDocument = Task & Document;
 
-@Schema({toJSON: {virtuals: true}, toObject: {virtuals: true}})
+@Schema({toJSON: {virtuals: true}, toObject: {virtuals: true}, timestamps: true})
 export class Task implements ITask {
 
     @Prop({type: String, required: true})

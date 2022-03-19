@@ -5,7 +5,7 @@ import {TaskDocument} from "../../task/schemas/task.schema";
 
 export type TaskBoardDocument = TaskBoard & Document;
 
-@Schema({toJSON: {virtuals: true}, toObject: {virtuals: true}})
+@Schema({toJSON: {virtuals: true}, toObject: {virtuals: true}, timestamps: true})
 export class TaskBoard {
 
     @Prop({type: String, required: true})

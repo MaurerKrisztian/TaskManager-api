@@ -3,7 +3,7 @@ import {Document} from 'mongoose';
 
 export type UserDocument = User & Document;
 
-@Schema({toJSON: {virtuals: true}, toObject: {virtuals: true}})
+@Schema({toJSON: {virtuals: true}, toObject: {virtuals: true}, timestamps: true})
 export class User {
     @Prop({type: String, required: true})
     username: string;
