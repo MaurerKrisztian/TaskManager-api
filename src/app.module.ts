@@ -13,6 +13,7 @@ import {JwtModule, JwtService} from "@nestjs/jwt";
 import {jwtConstants} from "./services/constants";
 import {EmailModule} from './email/email.module';
 import {FileModule} from './file/file.module';
+import { WorkedtimeModule } from './workedtime/workedtime.module';
 
 import databaseConfig from './services/config/database.config';
 
@@ -29,7 +30,8 @@ import databaseConfig from './services/config/database.config';
         }),
         UserModule,
         EmailModule,
-        FileModule
+        FileModule,
+        WorkedtimeModule
     ],
     controllers: [AppController],
     providers: [AppService, AuthMiddleware],
