@@ -27,7 +27,10 @@ export class EmailService {
             context: {
                 style: fs.readFileSync("./src/email/templates/email.css").toString(),
                 data: tasks.map(task => {
-                    return {title: task.title, startAt: task.startAt.toLocaleDateString() + " "+task.startAt.toLocaleTimeString()}
+                    return {
+                        title: task.title,
+                        startAt: task.startAt.getHours() + ":" + task.startAt.getMinutes()
+                    }
                 })
                 // [{name: "elsso"} , {name: "masik"}]
             }
