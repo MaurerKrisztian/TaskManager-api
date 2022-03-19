@@ -8,8 +8,9 @@ export class TaskRepository extends CrudService<TaskDocument> {
         super(taskModel);
     }
 
-    findOneByName(name: string) {
-        return this.taskModel.findOne({username: name})
+
+    getTimelineTasks(userId: string) {
+        return this.taskModel.find({userId: userId,startAt: {$exists: true}, isCompleted:false }).sort('startAt').exec()
     }
 
 }

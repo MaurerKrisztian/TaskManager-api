@@ -17,8 +17,8 @@ export class TaskController {
     }
 
     @Get()
-    findAll() {
-        return this.taskService.findAll();
+    findAll(@User() user: IUser) {
+        return this.taskService.getTimelineTasks(user.id)
     }
 
 

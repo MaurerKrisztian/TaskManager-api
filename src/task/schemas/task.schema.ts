@@ -18,8 +18,8 @@ export class Task implements ITask {
     @Prop({type: Boolean, required: true})
     isCompleted: boolean;
 
-    @Prop({type: String, required: true})
-    boardId: string
+    @Prop({type: String, required: false})
+    boardId?: string
 
     @Prop({type: Date, required: true})
     createdAt: Date;
@@ -52,7 +52,7 @@ export interface ITask {
 
     isCompleted: boolean;
 
-    boardId: string
+    boardId?: string
 
     userId: string
 }

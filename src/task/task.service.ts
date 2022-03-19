@@ -13,12 +13,14 @@ export class TaskService {
 
     async create(createTaskDto: CreateTaskDto) {
         const task = await this.taskRepository.create(createTaskDto);
-        await this.boardRepository.addTaskToBoard(task.boardId, task._id)
+        if (task.boardId) {
+            await this.boardRepository.addTaskToBoard(task.boardId, task._id)
+        }
         return task
     }
 
-    findAll() {
-        return `This action returns all task`;
+    getTimelineTasks(userId: string) {
+        return this.taskRepository.getTimelineTasks(userId)
     }
 
     findOne(id: number) {
