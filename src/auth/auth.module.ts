@@ -7,6 +7,7 @@ import {JwtModule} from "@nestjs/jwt";
 import {jwtConstants} from "../services/constants";
 import {UserService} from "../user/user.service";
 import {AuthMiddleware} from "./auth-middleware.service";
+import {LogsModule} from "../logs/logs.module";
 
 @Module({
     imports: [
@@ -16,6 +17,7 @@ import {AuthMiddleware} from "./auth-middleware.service";
             secret: jwtConstants.secret,
             signOptions: {expiresIn: '5h'},
         }),
+        LogsModule
     ],
     providers: [AuthService, UserService, AuthMiddleware],
     controllers: [AuthController],

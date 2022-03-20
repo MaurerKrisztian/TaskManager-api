@@ -8,6 +8,7 @@ export class AuthController {
 
     @Post('login')
     async login(@Body() user): Promise<any> {
-        return {username: user.username, token: await this.authService.login(user)};
+        const auth = await this.authService.login(user)
+        return {username: user.username, token: auth.token, userId: auth.id};
     }
 }

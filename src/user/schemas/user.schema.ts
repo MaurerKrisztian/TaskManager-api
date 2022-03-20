@@ -10,6 +10,19 @@ export class User {
 
     @Prop({type: String, required: true})
     password: string;
+
+    @Prop({
+        type: String, required: false, default(val: any): any {
+            return 'user'
+        }
+    })
+    role: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
+
+export interface IUser {
+    username: string;
+    password: string;
+    role: string;
+}
