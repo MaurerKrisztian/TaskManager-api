@@ -26,4 +26,4 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
-        script: touch pull.sh
+        script: bash pull.sh
