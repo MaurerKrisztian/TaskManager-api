@@ -22,7 +22,7 @@ async function bootstrap() {
     SwaggerModule.setup(openApiRoot, app, SwaggerModule.createDocument(app, config));
 
     return app
-        // .setGlobalPrefix('api')
+        .setGlobalPrefix('api')
         .useGlobalPipes(new ValidationPipe())
         .listen(port);
 }
