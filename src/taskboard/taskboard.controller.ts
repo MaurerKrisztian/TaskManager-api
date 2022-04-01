@@ -22,7 +22,7 @@ export class TaskboardController {
 
     @Get(':id')
     findOne(@Param('id') id: string) {
-        return this.taskboardService.findOne(+id);
+        return this.taskboardService.findOne(id);
     }
 
     @Patch(':id')

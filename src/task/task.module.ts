@@ -6,7 +6,6 @@ import {MongooseModule} from "@nestjs/mongoose";
 import {Task, TaskSchema} from "./schemas/task.schema";
 import {TaskRepository} from "./schemas/task.repository";
 import {TaskboardModule} from "../taskboard/taskboard.module";
-import {EmailModule} from "../email/email.module";
 
 @Module({
     imports: [ConfigModule,

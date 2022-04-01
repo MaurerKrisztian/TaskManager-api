@@ -6,7 +6,7 @@ export default registerAs(
     DATABASE,
     (): MongooseModuleOptions => ({
         uri: process.env.DB_URI,
-        dbName: 'test',
+        dbName: process.env.DB_NAME || 'test',
         useUnifiedTopology: true,
         useNewUrlParser: true,
         autoIndex: true,

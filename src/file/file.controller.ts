@@ -44,7 +44,6 @@ export class FileController {
 
     @Get(':id/info')
     async getInfo(@Param('id') id: string) {
-        const info = await this.fileService.findInfo(id)
-        return info
+        return await this.fileService.findInfo(id)
     }
 }

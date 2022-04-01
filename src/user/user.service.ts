@@ -25,12 +25,4 @@ export class UserService {
     async findOneByName(name: string) {
         return this.userRepository.findOneByName(name)
     }
-
-    update(id: number, updateUserDto: UpdateUserDto) {
-        return `This action updates a #${id} user`;
-    }
-
-    remove(id: number) {
-        return `This action removes a #${id} user`;
-    }
 }

@@ -9,7 +9,6 @@ export class WorkedtimeRepository extends CrudService<WorkedtimeDocument> {
         super(workedtimeModel);
     }
 
-
     async hasWorkSessionStarted(taskId: string) {
         const result = await this.workedtimeModel.find({
             taskId: taskId,
@@ -18,12 +17,12 @@ export class WorkedtimeRepository extends CrudService<WorkedtimeDocument> {
         })
         return result.length > 0
     }
+
     async getCurrentWorkSession(taskId: string) {
-        return  await this.workedtimeModel.find({
+        return this.workedtimeModel.find({
             taskId: taskId,
             start: {$exists: true},
             end: {$exists: false}
         })
-
     }
 }

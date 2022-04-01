@@ -1,15 +1,17 @@
 import * as nodemailer from "nodemailer";
-import {Injectable} from "@nestjs/common";
+import {Injectable, Logger} from "@nestjs/common";
 import {Transporter} from "nodemailer";
 import Mail from "nodemailer/lib/mailer";
 import {ITask} from "../task/schemas/task.schema";
 import * as fs from "fs";
+import {TemplatePaths} from "./templates/TemplatePaths";
 
 const hbs = require('nodemailer-express-handlebars')
 const path = require('path')
 
 @Injectable()
 export class EmailService {
+    private readonly logger = new Logger(EmailService.name)
 
     transporter: Transporter
 
@@ -29,32 +31,26 @@ export class EmailService {
                 data: tasks.map(task => {
                     return {
                         title: task.title,
-                        startAt: task.startAt.getHours() + ":" + task.startAt.getMinutes()
+                        startAt: `${task.startAt.getHours()}:${task.startAt.getMinutes()}`
                     }
                 })
-                // [{name: "elsso"} , {name: "masik"}]
             }
         }
-        console.log(fs.readFileSync("./src/email/templates/email.css").toString())
         return this.sendMail(mailOptions)
     }
 
     async sendMail(mailOptions?: Mail.Options) {
         const handlebarOptions = {
             viewEngine: {
-                partialsDir: path.resolve('./src/email/templates/'),
+                partialsDir: path.resolve(`${TemplatePaths.EMAIL_TEMPLATES_PATH}/`),
                 defaultLayout: false,
             },
-            viewPath: path.resolve('./src/email/templates/'),
+            viewPath: path.resolve(`${TemplatePaths.EMAIL_TEMPLATES_PATH}/`),
         };
-
-// use a template file with nodemailer
+        // use a template file with nodemailer
         this.transporter.use('compile', hbs(handlebarOptions))
-
-
         const info = await this.transporter.sendMail(mailOptions);
-
-        console.log("send mail ", info)
+        this.logger.debug(`Send mail: ${JSON.stringify(info)}`)
         return info
     }
 

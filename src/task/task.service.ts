@@ -23,8 +23,8 @@ export class TaskService {
         return this.taskRepository.getTimelineTasks(userId)
     }
 
-    findOne(id: number) {
-        return `This action returns a #${id} task`;
+    findOne(id: string) {
+        return this.taskRepository.findOne(id)
     }
 
     update(id: string, updateTaskDto: UpdateTaskDto) {

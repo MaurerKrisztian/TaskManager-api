@@ -17,8 +17,8 @@ export class TaskboardService {
         return this.taskboardRepository.find({userId: id});
     }
 
-    findOne(id: number) {
-        return `This action returns a #${id} taskboard`;
+    findOne(id: string) {
+        return  this.taskboardRepository.findOne(id);
     }
 
     update(id: number, updateTaskboardDto: UpdateTaskboardDto) {

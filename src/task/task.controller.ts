@@ -3,7 +3,6 @@ import {TaskService} from './task.service';
 import {CreateTaskDto} from './dto/create-task.dto';
 import {UpdateTaskDto} from './dto/update-task.dto';
 import {IUser, User} from "../auth/auth.user.decorator";
-import {EmailService} from "../email/email.service";
 
 @Controller('task')
 export class TaskController {
@@ -24,7 +23,7 @@ export class TaskController {
 
     @Get(':id')
     findOne(@Param('id') id: string) {
-        return this.taskService.findOne(+id);
+        return this.taskService.findOne(id);
     }
 
     @Get('board/:id')
