@@ -1,9 +1,13 @@
-#stage 1
-FROM node:latest as node
-WORKDIR /app
+FROM node:14.19-alpine as builder
+WORKDIR /opt/app/
+COPY package*.json ./
+RUN npm ci
 COPY . .
-RUN npm install
-RUN npm run build --prod
-#stage 2
-FROM nginx:alpine
-COPY --from=node /app/dist /usr/share/nginx/html
+RUN npm run prebuild && npm run build && npm prune --production
+
+FROM node:14.19-alpine as server
+WORKDIR /opt/app/
+COPY --from=builder /opt/app/dist ./dist
+COPY --from=builder /opt/app/node_modules ./node_modules
+COPY --from=builder /opt/app/package.json ./package.json
+CMD ["node", "dist/main.js"]
