@@ -52,4 +52,4 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
-        script: bash pull-api.sh
+        script: bash pull-docker-api.sh
