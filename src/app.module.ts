@@ -9,7 +9,7 @@ import { DatabaseModule } from './database/database.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { AuthMiddleware } from './auth/auth-middleware.service';
-import { JwtModule, JwtService } from '@nestjs/jwt';
+import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './services/constants';
 import { EmailModule } from './email/email.module';
 import { FileModule } from './file/file.module';
