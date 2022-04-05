@@ -1,7 +1,7 @@
 import { CrudService } from '../../services/crud.service';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { WorkedtimeDocument, WorkedtimeSchema } from './workedtime.schema';
+import { WorkedtimeDocument } from './workedtime.schema';
 import { Workedtime } from '../entities/workedtime.entity';
 
 export class WorkedtimeRepository extends CrudService<WorkedtimeDocument> {

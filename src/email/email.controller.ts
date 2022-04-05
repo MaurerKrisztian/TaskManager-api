@@ -1,13 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-  Logger,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Logger } from '@nestjs/common';
 import { EmailService } from './email.service';
 import { IUser, User } from '../auth/auth.user.decorator';
 import { TaskService } from '../task/task.service';

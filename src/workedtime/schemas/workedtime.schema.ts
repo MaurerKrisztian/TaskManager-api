@@ -1,7 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import mongoose from 'mongoose';
-import { TaskDocument } from '../../task/schemas/task.schema';
 
 export type WorkedtimeDocument = Workedtime & Document;
 

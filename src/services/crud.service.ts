@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Document, FilterQuery, Model } from 'mongoose';
+import { Document, FilterQuery } from 'mongoose';
 import { DocumentNotFoundError } from './repository.service';
 
 @Injectable()
