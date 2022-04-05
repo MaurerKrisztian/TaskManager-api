@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Document, FilterQuery } from 'mongoose';
+import {Document, FilterQuery, Model} from 'mongoose'; // eslint-disable-line
 import { DocumentNotFoundError } from './repository.service';
 
 @Injectable()
