@@ -19,32 +19,32 @@ import { LogsModule } from './logs/logs.module';
 import databaseConfig from './services/config/database.config';
 
 @Module({
-  imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-      load: [databaseConfig],
-    }),
-    MongooseModule.forRoot(process.env.DB_URI),
-    TaskboardModule,
-    TaskModule,
-    UserModule,
-    AuthModule,
-    DatabaseModule,
-    JwtModule.register({
-      secret: jwtConstants.secret,
-      signOptions: { expiresIn: '5h' },
-    }),
-    UserModule,
-    EmailModule,
-    FileModule,
-    WorkedtimeModule,
-    LogsModule,
-  ],
-  controllers: [AppController],
-  providers: [AppService, AuthMiddleware],
+    imports: [
+        ConfigModule.forRoot({
+            isGlobal: true,
+            load: [databaseConfig],
+        }),
+        MongooseModule.forRoot(process.env.DB_URI),
+        TaskboardModule,
+        TaskModule,
+        UserModule,
+        AuthModule,
+        DatabaseModule,
+        JwtModule.register({
+            secret: jwtConstants.secret,
+            signOptions: { expiresIn: '5h' },
+        }),
+        UserModule,
+        EmailModule,
+        FileModule,
+        WorkedtimeModule,
+        LogsModule,
+    ],
+    controllers: [AppController],
+    providers: [AppService, AuthMiddleware],
 })
 export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(AuthMiddleware).forRoutes('*');
-  }
+    configure(consumer: MiddlewareConsumer) {
+        consumer.apply(AuthMiddleware).forRoutes('*');
+    }
 }

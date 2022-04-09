@@ -1,49 +1,53 @@
 import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
+    Controller,
+    Get,
+    Post,
+    Body,
+    Patch,
+    Param,
+    Delete,
+    Logger,
 } from '@nestjs/common';
-import { TaskService } from './task.service';
-import { CreateTaskDto } from './dto/create-task.dto';
-import { UpdateTaskDto } from './dto/update-task.dto';
-import { IUser, User } from '../auth/auth.user.decorator';
+import {TaskService} from './task.service';
+import {CreateTaskDto} from './dto/create-task.dto';
+import {UpdateTaskDto} from './dto/update-task.dto';
+import {IUser, User} from '../auth/auth.user.decorator';
 
 @Controller('task')
 export class TaskController {
-  constructor(private readonly taskService: TaskService) {}
+    private readonly logger = new Logger(TaskController.name);
 
-  @Post()
-  create(@Body() createTaskDto: CreateTaskDto, @User() user: IUser) {
-    createTaskDto['userId'] = user.id;
-    return this.taskService.create(createTaskDto);
-  }
+    constructor(private readonly taskService: TaskService) {
+    }
 
-  @Get()
-  findAll(@User() user: IUser) {
-    return this.taskService.getTimelineTasks(user.id);
-  }
+    @Post()
+    create(@Body() createTaskDto: CreateTaskDto, @User() user: IUser) {
+        createTaskDto['userId'] = user.id;
+        return this.taskService.create(createTaskDto);
+    }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.taskService.findOne(id);
-  }
+    @Get()
+    findAll(@User() user: IUser) {
+        return this.taskService.getTimelineTasks(user.id);
+    }
 
-  @Get('board/:id')
-  getBoardTask(@Param('id') boardId: string) {
-    return this.taskService.getBordTasks(boardId);
-  }
+    @Get(':id')
+    findOne(@Param('id') id: string) {
+        return this.taskService.findOne(id);
+    }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto) {
-    return this.taskService.update(id, updateTaskDto);
-  }
+    @Get('board/:id')
+    getBoardTask(@Param('id') boardId: string) {
+        return this.taskService.getBordTasks(boardId);
+    }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.taskService.remove(id);
-  }
+    @Patch(':id')
+    update(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto) {
+        return this.taskService.update(id, updateTaskDto);
+    }
+
+    @Delete(':id')
+    remove(@Param('id') id: string) {
+        return this.taskService.remove(id);
+    }
 }
