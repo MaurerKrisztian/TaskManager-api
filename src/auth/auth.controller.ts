@@ -3,11 +3,11 @@ import { AuthService } from './auth.service';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+    constructor(private readonly authService: AuthService) {}
 
   @Post('login')
-  async login(@Body() user): Promise<any> {
-    const auth = await this.authService.login(user);
-    return { username: user.username, token: auth.token, userId: auth.id };
-  }
+    async login(@Body() user): Promise<any> {
+        const auth = await this.authService.login(user);
+        return { username: user.username, token: auth.token, userId: auth.id };
+    }
 }

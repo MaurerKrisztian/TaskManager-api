@@ -6,14 +6,14 @@ import { GridFsMulterOptionsFactory } from './gridfs-multer-options.factory';
 import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
-  imports: [
-    MulterModule.registerAsync({
-      useClass: GridFsMulterOptionsFactory,
-    }),
+    imports: [
+        MulterModule.registerAsync({
+            useClass: GridFsMulterOptionsFactory,
+        }),
 
-    MongooseModule.forRoot(process.env.DB_URI),
-  ],
-  controllers: [FileController],
-  providers: [FileService, GridFsMulterOptionsFactory],
+        MongooseModule.forRoot(process.env.DB_URI),
+    ],
+    controllers: [FileController],
+    providers: [FileService, GridFsMulterOptionsFactory],
 })
 export class FileModule {}

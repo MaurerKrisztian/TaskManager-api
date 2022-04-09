@@ -1,13 +1,13 @@
 import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Param,
-  UseInterceptors,
-  UploadedFile,
-  StreamableFile,
-  Res,
+    Controller,
+    Get,
+    Post,
+    Body,
+    Param,
+    UseInterceptors,
+    UploadedFile,
+    StreamableFile,
+    Res,
 } from '@nestjs/common';
 import { FileService } from './file.service';
 import { ApiConsumes } from '@nestjs/swagger';
@@ -17,33 +17,33 @@ import { Response } from 'express';
 
 @Controller('files')
 export class FileController {
-  constructor(private readonly fileService: FileService) {}
+    constructor(private readonly fileService: FileService) {}
 
   @Post()
   @ApiConsumes('multipart/form-data')
   @ApiImplicitFile({ name: 'file', required: true })
   @UseInterceptors(FileInterceptor('file'))
-  async uploadFile(
+    async uploadFile(
     @Param('id') id: string,
     @Body() data: any,
     @UploadedFile() file: any,
-  ): Promise<string | any> {
-    return file.id;
-  }
+    ): Promise<string | any> {
+        return file.id;
+    }
 
   @Get(':id')
   async getFile(@Param('id') id: string, @Res() res: Response) {
-    const info = await this.fileService.findInfo(id);
-    res.header(
-      'Content-Disposition',
-      'attachment; filename="' + info.filename + '"',
-    );
-    const readStream = await this.fileService.readStream(id);
-    new StreamableFile(readStream).getStream().pipe(res);
+      const info = await this.fileService.findInfo(id);
+      res.header(
+          'Content-Disposition',
+          'attachment; filename="' + info.filename + '"',
+      );
+      const readStream = await this.fileService.readStream(id);
+      new StreamableFile(readStream).getStream().pipe(res);
   }
 
   @Get(':id/info')
   async getInfo(@Param('id') id: string) {
-    return await this.fileService.findInfo(id);
+      return await this.fileService.findInfo(id);
   }
 }

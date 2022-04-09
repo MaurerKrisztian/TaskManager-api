@@ -8,18 +8,18 @@ import { TaskRepository } from './schemas/task.repository';
 import { TaskboardModule } from '../taskboard/taskboard.module';
 
 @Module({
-  imports: [
-    ConfigModule,
-    MongooseModule.forFeature([
-      {
-        name: Task.name,
-        schema: TaskSchema,
-      },
-    ]),
-    TaskboardModule,
-  ],
-  controllers: [TaskController],
-  providers: [TaskService, TaskRepository],
-  exports: [TaskService, TaskRepository],
+    imports: [
+        ConfigModule,
+        MongooseModule.forFeature([
+            {
+                name: Task.name,
+                schema: TaskSchema,
+            },
+        ]),
+        TaskboardModule,
+    ],
+    controllers: [TaskController],
+    providers: [TaskService, TaskRepository],
+    exports: [TaskService, TaskRepository],
 })
 export class TaskModule {}

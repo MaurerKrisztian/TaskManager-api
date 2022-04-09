@@ -3,18 +3,18 @@ import { TaskboardController } from '../taskboard.controller';
 import { TaskboardService } from '../taskboard.service';
 
 describe('TaskboardController', () => {
-  let controller: TaskboardController;
+    let controller: TaskboardController;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      controllers: [TaskboardController],
-      providers: [TaskboardService],
-    }).compile();
+    beforeEach(async () => {
+        const module: TestingModule = await Test.createTestingModule({
+            controllers: [TaskboardController],
+            providers: [TaskboardService],
+        }).compile();
 
-    controller = module.get<TaskboardController>(TaskboardController);
-  });
+        controller = module.get<TaskboardController>(TaskboardController);
+    });
 
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
-  });
+    it('should be defined', () => {
+        expect(controller).toBeDefined();
+    });
 });

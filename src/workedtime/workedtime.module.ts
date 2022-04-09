@@ -8,14 +8,14 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { TaskModule } from '../task/task.module';
 
 @Module({
-  imports: [
-    ConfigModule,
-    MongooseModule.forFeature([
-      { name: Workedtime.name, schema: WorkedtimeSchema },
-    ]),
-    TaskModule,
-  ],
-  controllers: [WorkedtimeController],
-  providers: [WorkedtimeService, WorkedtimeRepository],
+    imports: [
+        ConfigModule,
+        MongooseModule.forFeature([
+            { name: Workedtime.name, schema: WorkedtimeSchema },
+        ]),
+        TaskModule,
+    ],
+    controllers: [WorkedtimeController],
+    providers: [WorkedtimeService, WorkedtimeRepository],
 })
 export class WorkedtimeModule {}

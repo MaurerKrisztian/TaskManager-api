@@ -6,19 +6,19 @@ import { UserDocument } from '../../user/schemas/user.schema';
 export type LogsDocument = Log & Document;
 
 @Schema({
-  toJSON: { virtuals: true },
-  toObject: { virtuals: true },
-  timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+    timestamps: true,
 })
 export class Log implements ILog {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
-  userId: UserDocument;
+      userId: UserDocument;
 
   @Prop({ type: String, required: true })
-  type: string;
+      type: string;
 
   @Prop({ type: mongoose.Schema.Types.Mixed, required: true })
-  content: any;
+      content: any;
 }
 
 export const LogsSchema = SchemaFactory.createForClass(Log);

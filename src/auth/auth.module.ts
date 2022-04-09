@@ -10,17 +10,17 @@ import { AuthMiddleware } from './auth-middleware.service';
 import { LogsModule } from '../logs/logs.module';
 
 @Module({
-  imports: [
-    UserModule,
-    PassportModule,
-    JwtModule.register({
-      secret: jwtConstants.secret,
-      signOptions: { expiresIn: '5h' },
-    }),
-    LogsModule,
-  ],
-  providers: [AuthService, UserService, AuthMiddleware],
-  controllers: [AuthController],
-  exports: [AuthService, AuthMiddleware],
+    imports: [
+        UserModule,
+        PassportModule,
+        JwtModule.register({
+            secret: jwtConstants.secret,
+            signOptions: { expiresIn: '5h' },
+        }),
+        LogsModule,
+    ],
+    providers: [AuthService, UserService, AuthMiddleware],
+    controllers: [AuthController],
+    exports: [AuthService, AuthMiddleware],
 })
 export class AuthModule {}

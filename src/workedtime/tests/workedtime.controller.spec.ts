@@ -3,18 +3,18 @@ import { WorkedtimeController } from '../workedtime.controller';
 import { WorkedtimeService } from '../workedtime.service';
 
 describe('WorkedtimeController', () => {
-  let controller: WorkedtimeController;
+    let controller: WorkedtimeController;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      controllers: [WorkedtimeController],
-      providers: [WorkedtimeService],
-    }).compile();
+    beforeEach(async () => {
+        const module: TestingModule = await Test.createTestingModule({
+            controllers: [WorkedtimeController],
+            providers: [WorkedtimeService],
+        }).compile();
 
-    controller = module.get<WorkedtimeController>(WorkedtimeController);
-  });
+        controller = module.get<WorkedtimeController>(WorkedtimeController);
+    });
 
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
-  });
+    it('should be defined', () => {
+        expect(controller).toBeDefined();
+    });
 });

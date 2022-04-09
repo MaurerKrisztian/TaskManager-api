@@ -4,18 +4,18 @@ import { Model } from 'mongoose';
 import { Log, LogsDocument } from './logs.schema';
 
 export class LogsRepository extends CrudService<LogsDocument> {
-  constructor(
+    constructor(
     @InjectModel(Log.name) protected readonly logModel: Model<LogsDocument>,
-  ) {
-    super(logModel);
-  }
+    ) {
+        super(logModel);
+    }
 
-  findAllSortedByCreation(type?: string, limit = -1) {
-    return this.logModel
-      .find({ type: type } || {})
-      .sort('-createdAt')
-      .limit(limit)
-      .populate('userId')
-      .exec();
-  }
+    findAllSortedByCreation(type?: string, limit = -1) {
+        return this.logModel
+            .find({ type: type } || {})
+            .sort('-createdAt')
+            .limit(limit)
+            .populate('userId')
+            .exec();
+    }
 }

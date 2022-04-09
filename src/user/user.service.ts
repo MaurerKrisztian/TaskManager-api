@@ -4,29 +4,29 @@ import { UserRepository } from './schemas/user.repository';
 
 @Injectable()
 export class UserService {
-  constructor(private readonly userRepository: UserRepository) {}
+    constructor(private readonly userRepository: UserRepository) {}
 
-  async create(createUserDto: CreateUserDto) {
-    const users = await this.userRepository.find({
-      username: createUserDto.username,
-    });
-    if (users.length > 0)
-      throw new HttpException(
-        'Username is not available',
-        HttpStatus.FORBIDDEN,
-      );
-    return this.userRepository.create(createUserDto);
-  }
+    async create(createUserDto: CreateUserDto) {
+        const users = await this.userRepository.find({
+            username: createUserDto.username,
+        });
+        if (users.length > 0)
+            throw new HttpException(
+                'Username is not available',
+                HttpStatus.FORBIDDEN,
+            );
+        return this.userRepository.create(createUserDto);
+    }
 
-  findAll() {
-    return `This action returns all user`;
-  }
+    findAll() {
+        return `This action returns all user`;
+    }
 
-  findOne(id: string) {
-    return this.userRepository.findOne(id);
-  }
+    findOne(id: string) {
+        return this.userRepository.findOne(id);
+    }
 
-  async findOneByName(name: string) {
-    return this.userRepository.findOneByName(name);
-  }
+    async findOneByName(name: string) {
+        return this.userRepository.findOneByName(name);
+    }
 }

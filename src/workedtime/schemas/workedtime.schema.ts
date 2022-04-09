@@ -4,20 +4,20 @@ import { Document } from 'mongoose';
 export type WorkedtimeDocument = Workedtime & Document;
 
 @Schema({
-  toJSON: { virtuals: true },
-  toObject: { virtuals: true },
-  timestamps: true,
-  id: false,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+    timestamps: true,
+    id: false,
 })
 export class Workedtime implements IWorkSession {
   @Prop({ type: String, required: true })
-  taskId: string;
+      taskId: string;
 
   @Prop({ type: Date, required: true })
-  start: Date;
+      start: Date;
 
   @Prop({ type: Date, required: false })
-  end?: Date;
+      end?: Date;
 }
 
 export const WorkedtimeSchema = SchemaFactory.createForClass(Workedtime);

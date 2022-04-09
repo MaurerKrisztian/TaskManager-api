@@ -7,14 +7,14 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { TaskBoard, TaskboardSchema } from './schemas/Taskboard.schema';
 
 @Module({
-  imports: [
-    ConfigModule,
-    MongooseModule.forFeature([
-      { name: TaskBoard.name, schema: TaskboardSchema },
-    ]),
-  ],
-  controllers: [TaskboardController],
-  providers: [TaskboardService, TaskboardRepository],
-  exports: [TaskboardRepository],
+    imports: [
+        ConfigModule,
+        MongooseModule.forFeature([
+            { name: TaskBoard.name, schema: TaskboardSchema },
+        ]),
+    ],
+    controllers: [TaskboardController],
+    providers: [TaskboardService, TaskboardRepository],
+    exports: [TaskboardRepository],
 })
 export class TaskboardModule {}

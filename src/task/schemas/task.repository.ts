@@ -4,24 +4,24 @@ import { Model } from 'mongoose';
 import { Task, TaskDocument } from './task.schema';
 
 export class TaskRepository extends CrudService<TaskDocument> {
-  constructor(
+    constructor(
     @InjectModel(Task.name) protected readonly taskModel: Model<TaskDocument>,
-  ) {
-    super(taskModel);
-  }
+    ) {
+        super(taskModel);
+    }
 
-  getTimelineTasks(userId: string) {
-    return this.taskModel
-      .find({
-        userId: userId,
-        startAt: { $exists: true },
-        isCompleted: false,
-      })
-      .sort('startAt')
-      .exec();
-  }
+    getTimelineTasks(userId: string) {
+        return this.taskModel
+            .find({
+                userId: userId,
+                startAt: { $exists: true },
+                isCompleted: false,
+            })
+            .sort('startAt')
+            .exec();
+    }
 
-  findOneAndUpdate(id: string, update: any) {
-    return this.taskModel.findOneAndUpdate({ _id: id }, update);
-  }
+    findOneAndUpdate(id: string, update: any) {
+        return this.taskModel.findOneAndUpdate({ _id: id }, update);
+    }
 }

@@ -4,25 +4,25 @@ import { Document } from 'mongoose';
 export type UserDocument = User & Document;
 
 @Schema({
-  toJSON: { virtuals: true },
-  toObject: { virtuals: true },
-  timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+    timestamps: true,
 })
 export class User {
   @Prop({ type: String, required: true })
-  username: string;
+      username: string;
 
   @Prop({ type: String, required: true })
-  password: string;
+      password: string;
 
   @Prop({
-    type: String,
-    required: false,
-    default(val: any): any {
-      return 'user';
-    },
+      type: String,
+      required: false,
+      default(val: any): any {
+          return 'user';
+      },
   })
-  role: string;
+      role: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

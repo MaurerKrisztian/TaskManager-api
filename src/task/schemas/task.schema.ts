@@ -6,49 +6,49 @@ import * as mongoose from 'mongoose';
 export type TaskDocument = Task & Document;
 
 @Schema({
-  toJSON: { virtuals: true },
-  toObject: { virtuals: true },
-  timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+    timestamps: true,
 })
 export class Task implements ITask {
   @Prop({ type: String, required: true })
-  userId: string;
+      userId: string;
 
   @Prop({ type: String, required: true })
-  title: string;
+      title: string;
 
   @Prop({ type: String, required: true })
-  description: string;
+      description: string;
 
   @Prop({ type: Boolean, required: true })
-  isCompleted: boolean;
+      isCompleted: boolean;
 
   @Prop({ type: String, required: false })
-  boardId?: string;
+      boardId?: string;
 
   @Prop({ type: Date, required: true })
-  createdAt: Date;
+      createdAt: Date;
 
   @Prop({ type: Date, required: false })
-  startAt?: Date;
+      startAt?: Date;
 
   @Prop({ type: [String], required: false })
-  labels?: string[];
+      labels?: string[];
 
   @Prop({
-    type: [String],
-    default(val: any): any {
-      return [];
-    },
+      type: [String],
+      default(val: any): any {
+          return [];
+      },
   })
-  fileIds: string[] = [];
+      fileIds: string[] = [];
 
   @Prop({
-    type: [
-      { type: mongoose.Schema.Types.ObjectId, ref: 'Workedtime', default: [] },
-    ],
+      type: [
+          { type: mongoose.Schema.Types.ObjectId, ref: 'Workedtime', default: [] },
+      ],
   })
-  workedTimes: WorkedtimeDocument[];
+      workedTimes: WorkedtimeDocument[];
 }
 
 export const TaskSchema = SchemaFactory.createForClass(Task);

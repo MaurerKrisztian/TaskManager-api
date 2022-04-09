@@ -5,34 +5,34 @@ import { TaskboardRepository } from './schemas/Taskboard.repository';
 
 @Injectable()
 export class TaskboardService {
-  constructor(private readonly taskboardRepository: TaskboardRepository) {}
+    constructor(private readonly taskboardRepository: TaskboardRepository) {}
 
-  create(createTaskboardDto: CreateTaskboardDto) {
-    return this.taskboardRepository.create(createTaskboardDto);
-  }
+    create(createTaskboardDto: CreateTaskboardDto) {
+        return this.taskboardRepository.create(createTaskboardDto);
+    }
 
-  findByUserId(id: string) {
-    return this.taskboardRepository.find({ userId: id });
-  }
+    findByUserId(id: string) {
+        return this.taskboardRepository.find({ userId: id });
+    }
 
-  findOne(id: string) {
-    return this.taskboardRepository.findOne(id);
-  }
+    findOne(id: string) {
+        return this.taskboardRepository.findOne(id);
+    }
 
-  update(id: number, updateTaskboardDto: UpdateTaskboardDto) {
-    return `This action updates a #${id} taskboard`;
-  }
+    update(id: number, updateTaskboardDto: UpdateTaskboardDto) {
+        return `This action updates a #${id} taskboard`;
+    }
 
-  remove(id: string) {
+    remove(id: string) {
     // todo: remove all task
-    return this.taskboardRepository.remove(id);
-  }
+        return this.taskboardRepository.remove(id);
+    }
 
-  findByUserAndPopulate(id: string) {
-    return this.taskboardRepository.findByUserAndPopulate(id);
-  }
+    findByUserAndPopulate(id: string) {
+        return this.taskboardRepository.findByUserAndPopulate(id);
+    }
 
-  moveTask(taskId: string, toBoardId: string, index: number) {
-    return this.taskboardRepository.moveTask(taskId, toBoardId, index);
-  }
+    moveTask(taskId: string, toBoardId: string, index: number) {
+        return this.taskboardRepository.moveTask(taskId, toBoardId, index);
+    }
 }
