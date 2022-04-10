@@ -19,6 +19,8 @@ export interface IWeeklyEmailData extends IScheduleData{
 export class WeeklyEmailSchedule implements IScheduleManager{
     private readonly logger = new Logger(WeeklyEmailSchedule.name)
 
+    static type = 'WeeklyReport'
+
     constructor(private readonly taskService: TaskService,
                 private readonly emailService: EmailService,
                 private readonly sender: WeeklyReportSender,
@@ -34,7 +36,7 @@ export class WeeklyEmailSchedule implements IScheduleManager{
     invalidateSchedule(userId: string, job: Job) {
         if (JobManager.userSchedules[userId]?.weeklyReport) {
             JobManager.userSchedules[userId].weeklyReport.job.cancel()
-            const res =  this.schedulesService.removeByType(userId, 'WeeklyReport');
+            const res =  this.schedulesService.removeByType(userId, WeeklyEmailSchedule.type);
             this.logger.debug(JSON.stringify(res))
             return res
         }

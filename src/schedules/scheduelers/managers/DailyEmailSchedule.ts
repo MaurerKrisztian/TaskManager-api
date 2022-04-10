@@ -19,6 +19,8 @@ export interface IDailyEmailData extends IScheduleData {
 export class DailyEmailSchedule implements IScheduleManager{
     private readonly logger = new Logger(DailyEmailSchedule.name);
 
+    static type = 'dailyEmail'
+
     constructor(private readonly taskService: TaskService,
                 private readonly emailService: EmailService,
                 private readonly sender: DailyEmailSender,
@@ -33,7 +35,7 @@ export class DailyEmailSchedule implements IScheduleManager{
     }
 
     async invalidateSchedule(userId: string, job: Job) {
-        const res = await this.schedulesService.removeByType(userId, 'dailyEmail');
+        const res = await this.schedulesService.removeByType(userId, DailyEmailSchedule.type);
         console.log(res);
 
         if (JobManager.userSchedules[userId]?.dailyMail) {

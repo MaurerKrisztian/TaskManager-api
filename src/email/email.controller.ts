@@ -26,6 +26,6 @@ export class EmailController {
 
     @Post('setupeveryday')
     async setup(@User() user: IUser, @Body() body: { date: Date }) {
-        return {next: await this.dailyEmailSchedule.createSchedule(user, {...body, type: 'dailyEmail'})}
+        return {next: await this.dailyEmailSchedule.createSchedule(user, {...body, type: DailyEmailSchedule.type})}
     }
 }
