@@ -5,12 +5,13 @@ import {Injectable, Logger} from "@nestjs/common";
 import {TaskService} from "../../../task/task.service";
 import {EmailService} from "../../../email/email.service";
 import {IUser} from "../../../auth/auth.user.decorator";
+import {DailyEmailSender} from "../../../email/senders/daily-email.sender";
 
 @Injectable()
 export class DailyEmailSchedule implements IScheduleManager{
     private readonly logger = new Logger(DailyEmailSchedule.name);
 
-    constructor(private readonly taskService: TaskService, private readonly emailService: EmailService) {
+    constructor(private readonly taskService: TaskService, private readonly emailService: EmailService,private readonly sender: DailyEmailSender) {
     }
 
     addScheduleToManager(userId: string, job: Job) {
@@ -37,7 +38,7 @@ export class DailyEmailSchedule implements IScheduleManager{
             if (!tasks || tasks.length == 0) {
                 this.logger.debug('No task today.');
             } else {
-                await this.emailService.sendTodayTasks(user.username, tasks);
+                await this.sender.send(user.username, tasks);
             }
         });
         return this.addScheduleToManager(user.id, job);

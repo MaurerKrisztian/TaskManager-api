@@ -5,6 +5,7 @@ import {Injectable, Logger} from "@nestjs/common";
 import {IUser} from "../../../auth/auth.user.decorator";
 import {TaskService} from "../../../task/task.service";
 import {EmailService} from "../../../email/email.service";
+import {WeeklyReportSender} from "../../../email/senders/weekly-report.sender";
 
 export interface IWeeklyEmailData {
     dayOfWeek: number,
@@ -16,7 +17,7 @@ export interface IWeeklyEmailData {
 export class WeeklyEmailSchedule implements IScheduleManager{
     private readonly logger = new Logger(WeeklyEmailSchedule.name)
 
-    constructor(private readonly taskService: TaskService, private readonly emailService: EmailService) {
+    constructor(private readonly taskService: TaskService, private readonly emailService: EmailService, private readonly sender: WeeklyReportSender) {
     }
 
     addScheduleToManager(userId: string, job: Job) {
@@ -45,7 +46,7 @@ export class WeeklyEmailSchedule implements IScheduleManager{
             if (!tasks || tasks.length == 0) {
                 this.logger.debug('No task today.');
             } else {
-                await this.emailService.sendWeeklyReport(user.username, tasks);
+                await this.sender.send(user.username, tasks);
             }
         });
         this.addScheduleToManager(user.id, job);

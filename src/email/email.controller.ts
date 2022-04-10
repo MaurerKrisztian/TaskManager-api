@@ -3,6 +3,7 @@ import {EmailService} from './email.service';
 import {IUser, User} from '../auth/auth.user.decorator';
 import {TaskService} from '../task/task.service';
 import {DailyEmailSchedule} from "../services/scheduelers/managers/DailyEmailSchedule";
+import {DailyEmailSender} from "./senders/daily-email.sender";
 
 @Controller('email')
 export class EmailController {
@@ -11,7 +12,8 @@ export class EmailController {
     constructor(
         private readonly emailService: EmailService,
         private readonly taskService: TaskService,
-        private readonly dailyEmailSchedule: DailyEmailSchedule
+        private readonly dailyEmailSchedule: DailyEmailSchedule,
+        private readonly dailyEmailSender:DailyEmailSender
     ) {
     }
 
@@ -19,7 +21,7 @@ export class EmailController {
     @Get('todaytasks')
     async getTodayTasks(@User() user: IUser) {
         const tasks = await this.taskService.getTodayTask(user.id);
-        return this.emailService.sendTodayTasks(user.username, tasks);
+        return this.dailyEmailSender.send(user.username, tasks);
     }
 
     @Post('setupeveryday')
