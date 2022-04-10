@@ -15,8 +15,10 @@ import { EmailModule } from './email/email.module';
 import { FileModule } from './file/file.module';
 import { WorkedtimeModule } from './workedtime/workedtime.module';
 import { LogsModule } from './logs/logs.module';
+import { SchedulesModule } from './schedules/schedules.module';
 
 import databaseConfig from './services/config/database.config';
+import {ScheduleLoader} from "./schedules/scheduelers/ScheduleLoader";
 
 @Module({
     imports: [
@@ -39,9 +41,10 @@ import databaseConfig from './services/config/database.config';
         FileModule,
         WorkedtimeModule,
         LogsModule,
+        SchedulesModule,
     ],
     controllers: [AppController],
-    providers: [AppService, AuthMiddleware],
+    providers: [AppService, AuthMiddleware, ScheduleLoader],
 })
 export class AppModule implements NestModule {
     configure(consumer: MiddlewareConsumer) {

@@ -49,4 +49,7 @@ export class CrudService<DOC extends Document> {
     async remove(id: string): Promise<DOC> {
         return this.Model.remove({ _id: id });
     }
+    async deleteMany(filter: any): Promise<any> {
+        return this.Model.deleteMany(filter);
+    }
 }

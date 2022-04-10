@@ -2,7 +2,7 @@ import {Controller, Get, Post, Body, Logger} from '@nestjs/common';
 import {EmailService} from './email.service';
 import {IUser, User} from '../auth/auth.user.decorator';
 import {TaskService} from '../task/task.service';
-import {DailyEmailSchedule} from "../services/scheduelers/managers/DailyEmailSchedule";
+import {DailyEmailSchedule} from "../schedules/scheduelers/managers/DailyEmailSchedule";
 import {DailyEmailSender} from "./senders/daily-email.sender";
 
 @Controller('email')
@@ -26,6 +26,6 @@ export class EmailController {
 
     @Post('setupeveryday')
     async setup(@User() user: IUser, @Body() body: { date: Date }) {
-        return {next: await this.dailyEmailSchedule.createSchedule(user, body.date)}
+        return {next: await this.dailyEmailSchedule.createSchedule(user, {...body, type: 'dailyEmail'})}
     }
 }
