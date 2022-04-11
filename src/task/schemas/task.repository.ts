@@ -10,15 +10,26 @@ export class TaskRepository extends CrudService<TaskDocument> {
         super(taskModel);
     }
 
-    getTimelineTasks(userId: string) {
-        return this.taskModel
+    async getTimelineTasks(userId: string) {
+        const tasksWithDate = await this.taskModel
             .find({
                 userId: userId,
-                startAt: { $exists: true },
+                startAt: {$exists: true},
                 isCompleted: false,
             })
             .sort('startAt')
             .exec();
+        const tasksWithNoBoard = await this.taskModel
+            .find({
+                userId: userId,
+                startAt: {$exists: false},
+                boardId: {$exists: false},
+                isCompleted: false,
+            })
+            .sort('startAt')
+            .exec();
+
+        return [...tasksWithDate, ...tasksWithNoBoard]
     }
 
     findOneAndUpdate(id: string, update: any) {
