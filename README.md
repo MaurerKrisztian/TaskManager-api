@@ -11,5 +11,6 @@
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=MaurerKrisztian_TaskManager-api&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=MaurerKrisztian_TaskManager-api)
 
 http://172.104.139.21:3000/
+https://mytaskplan.me/api/api-doc/
 
 API for https://mytaskplan.me
