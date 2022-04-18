@@ -4,7 +4,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import {ScheduleLoader} from "./schedules/scheduelers/ScheduleLoader";
 
-const openApiRoot = 'api-doc';
+const openApiRoot = 'api/api-doc';
 const port = process.env.PORT || '3000';
 const version = process.env.npm_package_version || 'unknown';
 
@@ -16,7 +16,6 @@ async function bootstrap() {
         .setTitle('TaskManager doc')
         .setDescription('The TaskManager API description')
         .setVersion(`v${version}`)
-        .addTag('TaskManager')
         .build();
 
     SwaggerModule.setup(

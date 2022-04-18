@@ -13,11 +13,11 @@ export class FileService {
     }
 
     async readStream(id: string): Promise<GridFSBucketReadStream> {
-        return await this.fileModel.readFileStream(id);
+        return this.fileModel.readFileStream(id);
     }
 
     async writeFile(stream: any): Promise<IGridFSObject> {
-        return await this.fileModel.writeFileStream(stream, {
+        return this.fileModel.writeFileStream(stream, {
             filename: 'testfile.txt',
         });
     }
@@ -39,7 +39,7 @@ export class FileService {
     }
 
     async deleteFile(id: string): Promise<boolean> {
-        return await this.fileModel.delete(id);
+        return this.fileModel.delete(id);
     }
 }
 

@@ -10,12 +10,13 @@ import {
     Res,
 } from '@nestjs/common';
 import { FileService } from './file.service';
-import { ApiConsumes } from '@nestjs/swagger';
+import {ApiConsumes, ApiTags} from '@nestjs/swagger';
 import { ApiImplicitFile } from '@nestjs/swagger/dist/decorators/api-implicit-file.decorator';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Response } from 'express';
 
 @Controller('files')
+@ApiTags('files')
 export class FileController {
     constructor(private readonly fileService: FileService) {}
 
@@ -36,7 +37,7 @@ export class FileController {
       const info = await this.fileService.findInfo(id);
       res.header(
           'Content-Disposition',
-          'attachment; filename="' + info.filename + '"',
+          `attachment; filename="${info.filename}"`,
       );
       const readStream = await this.fileService.readStream(id);
       new StreamableFile(readStream).getStream().pipe(res);
@@ -44,6 +45,6 @@ export class FileController {
 
   @Get(':id/info')
   async getInfo(@Param('id') id: string) {
-      return await this.fileService.findInfo(id);
+      return this.fileService.findInfo(id);
   }
 }

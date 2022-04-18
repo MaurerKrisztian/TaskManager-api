@@ -4,8 +4,10 @@ import {IUser, User} from '../auth/auth.user.decorator';
 import {TaskService} from '../task/task.service';
 import {DailyEmailSchedule} from "../schedules/scheduelers/managers/DailyEmailSchedule";
 import {DailyEmailSender} from "./senders/daily-email.sender";
+import {ApiTags} from "@nestjs/swagger";
 
 @Controller('email')
+@ApiTags('email')
 export class EmailController {
     private readonly logger = new Logger(EmailController.name);
 

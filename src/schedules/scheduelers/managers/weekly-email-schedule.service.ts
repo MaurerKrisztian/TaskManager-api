@@ -8,8 +8,8 @@ import {EmailService} from "../../../email/email.service";
 import {WeeklyReportSender} from "../../../email/senders/weekly-report.sender";
 import {SchedulesService} from "../../schedules.service";
 import {IScheduleData} from "./DailyEmailSchedule";
-
-export interface IWeeklyEmailData extends IScheduleData{
+/***/
+export interface IWeeklyEmailData extends IScheduleData {
     dayOfWeek: number,
     dateForTime: Date,
     reportDayLength: number

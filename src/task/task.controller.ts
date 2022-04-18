@@ -12,7 +12,9 @@ import {TaskService} from './task.service';
 import {CreateTaskDto} from './dto/create-task.dto';
 import {UpdateTaskDto} from './dto/update-task.dto';
 import {IUser, User} from '../auth/auth.user.decorator';
+import {ApiTags} from "@nestjs/swagger";
 
+@ApiTags('task')
 @Controller('task')
 export class TaskController {
     private readonly logger = new Logger(TaskController.name);

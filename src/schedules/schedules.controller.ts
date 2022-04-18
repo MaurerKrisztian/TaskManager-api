@@ -2,8 +2,10 @@ import {Controller, Delete, Get, Param} from '@nestjs/common';
 import { SchedulesService } from './schedules.service';
 import {SchedulesRepository} from "./schema/schedules.repository";
 import {IUser, User} from "../auth/auth.user.decorator";
+import {ApiTags} from "@nestjs/swagger";
 
 @Controller('schedules')
+@ApiTags('schedules')
 export class SchedulesController {
     constructor(private readonly schedulesService: SchedulesService, private readonly repo: SchedulesRepository) {}
 

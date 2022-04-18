@@ -10,8 +10,10 @@ import {
 import { WorkedtimeService } from './workedtime.service';
 import { WorkedtimeRepository } from './schemas/workedtime.repository';
 import { TaskRepository } from '../task/schemas/task.repository';
+import {ApiTags} from "@nestjs/swagger";
 
 @Controller('workedtime')
+@ApiTags('workedtime')
 export class WorkedtimeController {
     constructor(
     private readonly workedtimeService: WorkedtimeService,

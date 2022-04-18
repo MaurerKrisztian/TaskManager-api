@@ -11,8 +11,10 @@ import { TaskboardService } from './taskboard.service';
 import { CreateTaskboardDto } from './dto/create-taskboard.dto';
 import { UpdateTaskboardDto } from './dto/update-taskboard.dto';
 import { IUser, User } from '../auth/auth.user.decorator';
+import {ApiTags} from "@nestjs/swagger";
 
 @Controller('taskboard')
+@ApiTags('taskboard')
 export class TaskboardController {
     constructor(private readonly taskboardService: TaskboardService) {}
 
