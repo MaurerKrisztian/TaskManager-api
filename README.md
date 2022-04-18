@@ -3,6 +3,7 @@
 
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=MaurerKrisztian_TaskManager-api&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=MaurerKrisztian_TaskManager-api)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=MaurerKrisztian_TaskManager-api&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=MaurerKrisztian_TaskManager-api)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=MaurerKrisztian_TaskManager-api&metric=bugs)](https://sonarcloud.io/summary/new_code?id=MaurerKrisztian_TaskManager-api)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=MaurerKrisztian_TaskManager-api&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=MaurerKrisztian_TaskManager-api)
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=MaurerKrisztian_TaskManager-api&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=MaurerKrisztian_TaskManager-api)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=MaurerKrisztian_TaskManager-api&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=MaurerKrisztian_TaskManager-api)
