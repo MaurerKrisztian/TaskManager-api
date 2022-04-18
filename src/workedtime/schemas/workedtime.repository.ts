@@ -22,7 +22,6 @@ export class WorkedtimeRepository extends CrudService<WorkedtimeDocument> {
         const result2 = await this.workedtimeModel.find({
             taskId: taskId,
         });
-        console.log('aaaaaaaaaaaaaaaaaa', result.length, result2.length);
         return result.length > 0;
     }
 

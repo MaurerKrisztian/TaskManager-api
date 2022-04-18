@@ -44,7 +44,6 @@ export class TaskboardController {
 
   @Patch('/:toBoard/movetask')
   move(
-    @Param('id') id: string,
     @Body() moveData: { taskId: string; toBoard: string; index: number },
   ) {
       return this.taskboardService.moveTask(

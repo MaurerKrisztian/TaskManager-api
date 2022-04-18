@@ -25,7 +25,6 @@ export class FileController {
   @ApiImplicitFile({ name: 'file', required: true })
   @UseInterceptors(FileInterceptor('file'))
     async uploadFile(
-    @Param('id') id: string,
     @Body() data: any,
     @UploadedFile() file: any,
     ): Promise<string | any> {

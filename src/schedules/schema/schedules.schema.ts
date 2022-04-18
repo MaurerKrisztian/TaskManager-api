@@ -14,7 +14,7 @@ export class Schedules implements ISchedules<any> {
         userId: string;
 
     @Prop({ type: Object, required: false })
-        createOptions: any & IScheduleData
+        createOptions: any
 }
 
 export const SchedulesSchema = SchemaFactory.createForClass(Schedules);

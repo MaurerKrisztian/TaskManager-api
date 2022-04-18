@@ -23,9 +23,6 @@ export class WorkedtimeController {
 
   @Post('/start')
     async create(@Body() createWorkedtimeDto: { start: Date; taskId: string }) {
-        console.log(
-            'ooooooooooooooooooooooo-------------------------------opoooooooooooooooooooooooooooooooo',
-        );
         if (
             await this.workedtimeRepository.hasWorkSessionStarted(
                 createWorkedtimeDto.taskId,
@@ -34,11 +31,10 @@ export class WorkedtimeController {
             throw new HttpException('You have active session.', HttpStatus.FORBIDDEN);
         }
         const doc = await this.workedtimeRepository.create(createWorkedtimeDto);
-        const update = await this.taskRepo.findOneAndUpdate(
+        await this.taskRepo.findOneAndUpdate(
             createWorkedtimeDto.taskId,
             { $push: { workedTimes: doc._id } },
         ); // todo bele egybol
-        // console.log("uuuuuuuuuuuuuuuuuuuuuu",update)
         return this.workedtimeRepository.create(createWorkedtimeDto);
     }
 
@@ -55,8 +51,6 @@ export class WorkedtimeController {
       const currentWorkSession = (
           await this.workedtimeRepository.getCurrentWorkSession(id)
       )[0];
-
-      console.log('end', currentWorkSession, { end: body.end });
       return this.workedtimeRepository.update(currentWorkSession._id, {
           end: body.end,
       });
