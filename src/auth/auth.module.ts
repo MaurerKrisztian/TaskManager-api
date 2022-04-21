@@ -15,7 +15,6 @@ import { LogsModule } from '../logs/logs.module';
         PassportModule,
         JwtModule.register({
             secret: jwtConstants.secret,
-            signOptions: { expiresIn: '5h' },
         }),
         LogsModule,
     ],
