@@ -10,6 +10,9 @@ export type WorkedtimeDocument = Workedtime & Document;
     id: false,
 })
 export class Workedtime implements IWorkSession {
+    @Prop({ type: String, required: true })
+        userId: string
+    
   @Prop({ type: String, required: true })
       taskId: string;
 

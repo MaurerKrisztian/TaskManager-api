@@ -5,12 +5,13 @@ import {
     Body,
     Param,
     HttpException,
-    HttpStatus,
+    HttpStatus, Query,
 } from '@nestjs/common';
 import { WorkedtimeService } from './workedtime.service';
-import { WorkedtimeRepository } from './schemas/workedtime.repository';
+import {groupedByType, WorkedtimeRepository} from './schemas/workedtime.repository';
 import { TaskRepository } from '../task/schemas/task.repository';
 import {ApiTags} from "@nestjs/swagger";
+import {IUser, User} from "../auth/auth.user.decorator";
 
 @Controller('workedtime')
 @ApiTags('workedtime')
@@ -22,7 +23,7 @@ export class WorkedtimeController {
     ) {}
 
   @Post('/start')
-    async create(@Body() createWorkedtimeDto: { start: Date; taskId: string }) {
+    async create(@User() user: IUser, @Body() createWorkedtimeDto: { start: Date; taskId: string }) {
         if (
             await this.workedtimeRepository.hasWorkSessionStarted(
                 createWorkedtimeDto.taskId,
@@ -30,12 +31,12 @@ export class WorkedtimeController {
         ) {
             throw new HttpException('You have active session.', HttpStatus.FORBIDDEN);
         }
-        const doc = await this.workedtimeRepository.create(createWorkedtimeDto);
+        const doc = await this.workedtimeRepository.create({...createWorkedtimeDto, userId: user.id});
         await this.taskRepo.findOneAndUpdate(
             createWorkedtimeDto.taskId,
             { $push: { workedTimes: doc._id } },
         ); // todo bele egybol
-        return this.workedtimeRepository.create(createWorkedtimeDto);
+        return this.workedtimeRepository.create({...createWorkedtimeDto, userId: user.id});
     }
 
   @Post('/end/:id')
@@ -65,12 +66,17 @@ export class WorkedtimeController {
       });
   }
 
-  @Get('/activeWorkSession/:id')
-  getActiveWorkSession(@Param('id') id: string) {
-      return this.workedtimeRepository.find({
-          taskId: id,
-          start: { $exists: true },
-          end: { $exists: false },
-      });
+    @Get('/chart/workeddays')
+  getAllByUser(@User() user: IUser, @Query('groupedBy') groupedBy: groupedByType){
+      return this.workedtimeRepository.groupByDay(user.id, groupedBy);
   }
+
+  @Get('/activeWorkSession/:id')
+    getActiveWorkSession(@Param('id') id: string) {
+        return this.workedtimeRepository.find({
+            taskId: id,
+            start: { $exists: true },
+            end: { $exists: false },
+        });
+    }
 }
