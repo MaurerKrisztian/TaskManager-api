@@ -3,18 +3,25 @@ import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { TaskRepository } from './schemas/task.repository';
 import { TaskboardRepository } from '../taskboard/schemas/Taskboard.repository';
+import {LabelRepository} from "../label/schemas/label.repository";
 
 @Injectable()
 export class TaskService {
     constructor(
     private readonly taskRepository: TaskRepository,
     private readonly boardRepository: TaskboardRepository,
+    private readonly labelRepository: LabelRepository
     ) {}
 
-    async create(createTaskDto: CreateTaskDto) {
+    async create(createTaskDto: CreateTaskDto, userId: string) {
         const task = await this.taskRepository.create(createTaskDto);
         if (task.boardId) {
             await this.boardRepository.addTaskToBoard(task.boardId, task._id);
+        }
+        for (const label of createTaskDto.labels) {
+            if ((await this.labelRepository.find({userId: userId, name: label})).length == 0){
+                await this.labelRepository.create({name: label, userId: userId});
+            }
         }
         return task;
     }

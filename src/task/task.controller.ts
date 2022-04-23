@@ -13,24 +13,30 @@ import {CreateTaskDto} from './dto/create-task.dto';
 import {UpdateTaskDto} from './dto/update-task.dto';
 import {IUser, User} from '../auth/auth.user.decorator';
 import {ApiTags} from "@nestjs/swagger";
+import {TaskRepository} from "./schemas/task.repository";
 
 @ApiTags('task')
 @Controller('task')
 export class TaskController {
     private readonly logger = new Logger(TaskController.name);
 
-    constructor(private readonly taskService: TaskService) {
+    constructor(private readonly taskService: TaskService, private readonly taskRepository: TaskRepository) {
     }
 
     @Post()
     create(@Body() createTaskDto: CreateTaskDto, @User() user: IUser) {
         createTaskDto['userId'] = user.id;
-        return this.taskService.create(createTaskDto);
+        return this.taskService.create(createTaskDto, user.id);
     }
 
     @Get()
     findAll(@User() user: IUser) {
         return this.taskService.getTimelineTasks(user.id);
+    }
+
+    @Get("label/:name")
+    getTasksByLabels(@User() user: IUser, @Param('name') labelName: string) {
+        return this.taskRepository.find({labels: {$all: [labelName]}})
     }
 
     @Get(':id')

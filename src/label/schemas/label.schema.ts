@@ -12,10 +12,10 @@ export class Label implements ILabel {
   @Prop({ type: String, required: true })
       userId: string;
 
-    @Prop({ type: String, required: true })
+    @Prop({ type: String, required: false, default: "red" })
         color: string;
 
-    @Prop({ type: String, required: true })
+    @Prop({ type: String, required: true, unique: true})
         name: string;
 }
 

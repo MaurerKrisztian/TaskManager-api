@@ -32,14 +32,12 @@ export class Task implements ITask {
   @Prop({ type: Date, required: false })
       startAt?: Date;
 
-  @Prop({ type: [String], required: false })
-      labels?: string[];
+  @Prop({ type: [String], required: false, default: [] })
+      labels: string[];
 
   @Prop({
       type: [String],
-      default(val: any): any {
-          return [];
-      },
+      default:[]
   })
       fileIds: string[] = [];
 
@@ -60,6 +58,7 @@ export interface ITask {
 
   createdAt: Date;
   startAt?: Date;
+    labels: string[];
 
   isCompleted: boolean;
 
