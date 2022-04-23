@@ -13,16 +13,20 @@ export class TaskService {
     private readonly labelRepository: LabelRepository
     ) {}
 
+    async createLabelsIfNotExists(labels: string[], userId: string) {
+        for (const label of labels) {
+            if ((await this.labelRepository.find({userId: userId, name: label})).length == 0) {
+                await this.labelRepository.create({name: label, userId: userId});
+            }
+        }
+    }
+
     async create(createTaskDto: CreateTaskDto, userId: string) {
         const task = await this.taskRepository.create(createTaskDto);
         if (task.boardId) {
             await this.boardRepository.addTaskToBoard(task.boardId, task._id);
         }
-        for (const label of createTaskDto.labels) {
-            if ((await this.labelRepository.find({userId: userId, name: label})).length == 0){
-                await this.labelRepository.create({name: label, userId: userId});
-            }
-        }
+        await this.createLabelsIfNotExists(createTaskDto.labels, userId)
         return task;
     }
 
@@ -34,7 +38,8 @@ export class TaskService {
         return this.taskRepository.findOne(id);
     }
 
-    update(id: string, updateTaskDto: UpdateTaskDto) {
+    async update(id: string, updateTaskDto: UpdateTaskDto, userId: string) {
+        await this.createLabelsIfNotExists(updateTaskDto.labels, userId)
         return this.taskRepository.update(id, updateTaskDto);
     }
 
