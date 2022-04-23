@@ -19,6 +19,7 @@ import { SchedulesModule } from './schedules/schedules.module';
 
 import databaseConfig from './services/config/database.config';
 import {ScheduleLoader} from "./schedules/scheduelers/ScheduleLoader";
+import { LabelModule } from './label/label.module';
 
 @Module({
     imports: [
@@ -42,6 +43,7 @@ import {ScheduleLoader} from "./schedules/scheduelers/ScheduleLoader";
         WorkedtimeModule,
         LogsModule,
         SchedulesModule,
+        LabelModule,
     ],
     controllers: [AppController],
     providers: [AppService, AuthMiddleware, ScheduleLoader],
