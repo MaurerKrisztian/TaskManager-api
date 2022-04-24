@@ -20,6 +20,7 @@ import { SchedulesModule } from './schedules/schedules.module';
 import databaseConfig from './services/config/database.config';
 import {ScheduleLoader} from "./schedules/scheduelers/ScheduleLoader";
 import { LabelModule } from './label/label.module';
+import { WeightModule } from './fitness/weight/weight.module';
 
 @Module({
     imports: [
@@ -44,6 +45,7 @@ import { LabelModule } from './label/label.module';
         LogsModule,
         SchedulesModule,
         LabelModule,
+        WeightModule,
     ],
     controllers: [AppController],
     providers: [AppService, AuthMiddleware, ScheduleLoader],
