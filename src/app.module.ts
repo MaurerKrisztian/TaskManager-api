@@ -21,6 +21,7 @@ import databaseConfig from './services/config/database.config';
 import {ScheduleLoader} from "./schedules/scheduelers/ScheduleLoader";
 import { LabelModule } from './label/label.module';
 import { WeightModule } from './fitness/weight/weight.module';
+import { FoodMacrosModule } from './fitness/food-macros/food-macros.module';
 
 @Module({
     imports: [
@@ -46,6 +47,7 @@ import { WeightModule } from './fitness/weight/weight.module';
         SchedulesModule,
         LabelModule,
         WeightModule,
+        FoodMacrosModule,
     ],
     controllers: [AppController],
     providers: [AppService, AuthMiddleware, ScheduleLoader],

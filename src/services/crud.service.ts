@@ -13,6 +13,9 @@ export class CrudService<DOC extends Document> {
     async find(filter: any): Promise<DOC[]> {
         return this.Model.find(filter);
     }
+    async findSort(filter: any, sort): Promise<DOC[]> {
+        return this.Model.find(filter).sort(sort);
+    }
 
     async findByName(name: string): Promise<DOC> {
         return this.Model.findOne({ name: name } as FilterQuery<DOC>);
