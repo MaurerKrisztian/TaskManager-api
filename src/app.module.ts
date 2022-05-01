@@ -22,6 +22,8 @@ import {ScheduleLoader} from "./schedules/scheduelers/ScheduleLoader";
 import { LabelModule } from './label/label.module';
 import { WeightModule } from './fitness/weight/weight.module';
 import { FoodMacrosModule } from './fitness/food-macros/food-macros.module';
+import { HabitModule } from './habit/habit.module';
+import { HabitDayStatusModule } from './habit-day-status/habit-day-status.module';
 
 @Module({
     imports: [
@@ -48,6 +50,8 @@ import { FoodMacrosModule } from './fitness/food-macros/food-macros.module';
         LabelModule,
         WeightModule,
         FoodMacrosModule,
+        HabitModule,
+        HabitDayStatusModule,
     ],
     controllers: [AppController],
     providers: [AppService, AuthMiddleware, ScheduleLoader],
