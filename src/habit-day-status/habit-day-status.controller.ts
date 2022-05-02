@@ -12,6 +12,12 @@ export class HabitDayStatusController {
   @Post()
     async create(@Body() createHabitStatusDto: CreateHabitDayStatusDto, @User() user: IUser) {
         createHabitStatusDto.userId = user.id;
+        createHabitStatusDto.date = new Date(createHabitStatusDto.date)
+        
+        // get day date in timezone
+        const offset = createHabitStatusDto.date.getTimezoneOffset()
+        const offsetMs = offset * 60_000;
+        createHabitStatusDto.date = new Date(createHabitStatusDto.date.getTime() - offsetMs);
         const date = new Date(createHabitStatusDto.date)
         date.setHours(0, 0, 0, 0);
         createHabitStatusDto.date = new Date(date);
