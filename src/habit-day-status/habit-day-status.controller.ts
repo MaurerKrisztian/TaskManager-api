@@ -1,4 +1,4 @@
-import {Controller, Get, Post, Body, Patch, Param, Delete, BadRequestException} from '@nestjs/common';
+import {Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common';
 import { HabitDayStatusService } from './habit-day-status.service';
 import {IUser, User} from "../auth/auth.user.decorator";
 import {UpdateWeightDto} from "../fitness/weight/dto/update-weight.dto";
@@ -13,24 +13,6 @@ export class HabitDayStatusController {
     async create(@Body() createHabitStatusDto: CreateHabitDayStatusDto, @User() user: IUser) {
         createHabitStatusDto.userId = user.id;
         createHabitStatusDto.date = new Date(createHabitStatusDto.date)
-        
-        // get day date in timezone
-        const offset = createHabitStatusDto.date.getTimezoneOffset()
-        const offsetMs = offset * 60_000;
-        createHabitStatusDto.date = new Date(createHabitStatusDto.date.getTime() - offsetMs);
-        const date = new Date(createHabitStatusDto.date)
-        date.setHours(0, 0, 0, 0);
-        createHabitStatusDto.date = new Date(date);
-
-        const recordOnThatDay = await this.habitDayStatusRepository.find({
-            userId: user.id,
-            habitId: createHabitStatusDto.habitId,
-            $gte: createHabitStatusDto.date,
-            $lt: new Date(date.setDate(date.getDate() + 1))
-        })
-        if (recordOnThatDay.length > 0) {
-            throw new BadRequestException({recordOnThatDay: recordOnThatDay}, "Can't create multiple record on the same days.");
-        }
         return this.habitDayStatusRepository.create(createHabitStatusDto);
     }
 
