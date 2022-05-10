@@ -23,10 +23,8 @@ export class TaskRepository extends CrudService<TaskDocument> {
             .find({
                 userId: userId,
                 startAt: {$exists: false},
-                boardId: {$exists: false},
                 isCompleted: false,
             })
-            .sort('startAt')
             .exec();
 
         return [...tasksWithDate, ...tasksWithNoBoard]
