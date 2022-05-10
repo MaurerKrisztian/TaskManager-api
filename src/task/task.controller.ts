@@ -14,13 +14,15 @@ import {UpdateTaskDto} from './dto/update-task.dto';
 import {IUser, User} from '../auth/auth.user.decorator';
 import {ApiTags} from "@nestjs/swagger";
 import {TaskRepository} from "./schemas/task.repository";
+import {TaskboardService} from "../taskboard/taskboard.service";
 
 @ApiTags('task')
 @Controller('task')
 export class TaskController {
     private readonly logger = new Logger(TaskController.name);
 
-    constructor(private readonly taskService: TaskService, private readonly taskRepository: TaskRepository) {
+    constructor(private readonly taskboardService:TaskboardService,
+        private readonly taskService: TaskService, private readonly taskRepository: TaskRepository) {
     }
 
     @Post()
@@ -50,7 +52,10 @@ export class TaskController {
     }
 
     @Patch(':id')
-    update(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto, @User() user: IUser) {
+    async update(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto, @User() user: IUser) {
+        if (updateTaskDto.boardId) {
+            await this.taskboardService.moveTask(id, updateTaskDto.boardId, 0);
+        }
         return this.taskService.update(id, updateTaskDto, user.id);
     }
 

@@ -11,6 +11,7 @@ import {Label, LabelSchema} from "../label/schemas/label.schema";
 
 @Module({
     imports: [
+        TaskboardModule,
         ConfigModule,
         MongooseModule.forFeature([
             {

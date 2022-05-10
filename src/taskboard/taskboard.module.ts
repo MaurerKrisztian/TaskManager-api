@@ -15,6 +15,6 @@ import { TaskBoard, TaskboardSchema } from './schemas/Taskboard.schema';
     ],
     controllers: [TaskboardController],
     providers: [TaskboardService, TaskboardRepository],
-    exports: [TaskboardRepository],
+    exports: [TaskboardRepository, TaskboardService],
 })
 export class TaskboardModule {}
