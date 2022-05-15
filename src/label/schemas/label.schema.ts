@@ -17,6 +17,9 @@ export class Label implements ILabel {
 
     @Prop({ type: String, required: true, unique: true})
         name: string;
+
+    @Prop({ type: String, required: false})
+        description: string;
 }
 
 export const LabelSchema = SchemaFactory.createForClass(Label);
