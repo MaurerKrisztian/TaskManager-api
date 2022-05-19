@@ -24,6 +24,7 @@ import { WeightModule } from './fitness/weight/weight.module';
 import { FoodMacrosModule } from './fitness/food-macros/food-macros.module';
 import { HabitModule } from './habit/habit.module';
 import { HabitDayStatusModule } from './habit-day-status/habit-day-status.module';
+import { VideocallModule } from './videocall/videocall.module';
 
 @Module({
     imports: [
@@ -52,6 +53,7 @@ import { HabitDayStatusModule } from './habit-day-status/habit-day-status.module
         FoodMacrosModule,
         HabitModule,
         HabitDayStatusModule,
+        VideocallModule,
     ],
     controllers: [AppController],
     providers: [AppService, AuthMiddleware, ScheduleLoader],

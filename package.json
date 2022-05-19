@@ -25,6 +25,7 @@
     "node": "14.16.1"
   },
   "dependencies": {
+    "@maurerkrisztian/dailyco-api-client": "^1.0.7",
     "@maurerkrisztian/tempalte-client": "^1.0.2",
     "@nestjs/common": "^8.0.0",
     "@nestjs/config": "^1.1.6",
