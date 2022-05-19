@@ -7,9 +7,10 @@ import {DailyEmailSender} from "./senders/daily-email.sender";
 import {WeeklyReportSender} from "./senders/weekly-report.sender";
 import {Senders} from "./senders/senders";
 import {SchedulesModule} from "../schedules/schedules.module";
+import {TemplateModule} from "@maurerkrisztian/tempalte-client/dist";
 
 @Module({
-    imports: [ConfigModule, TaskModule, SchedulesModule],
+    imports: [ConfigModule, TemplateModule.forRoot({baseUrl: "http://localhost:3012"}), TaskModule, SchedulesModule],
     controllers: [EmailController],
     providers: [EmailService, DailyEmailSender, WeeklyReportSender, Senders],
     exports: [EmailService, DailyEmailSender, WeeklyReportSender],
